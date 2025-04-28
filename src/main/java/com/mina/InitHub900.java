@@ -119,11 +119,13 @@ public class InitHub900 {
         @Override
         public void sessionClosed(IoSession session) throws Exception {
             super.sessionClosed(session);
-//        Date day=new Date();
-//        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss SSS");
-//        System.out.println(df.format(day)+"getManagedSessions:"+session.getService().getManagedSessions());
-            System.out.println("[hub server]" + session.getRemoteAddress().toString() + " sessionClosed!");
+            if (session.getRemoteAddress() != null) {
+                System.out.println("[hub server] " + session.getRemoteAddress().toString() + " sessionClosed!");
+            } else {
+                System.out.println("[hub server] Unknown session closed (remote address is null)");
+            }
         }
+        
 
         @Override
         public void sessionCreated(IoSession session) throws Exception {
